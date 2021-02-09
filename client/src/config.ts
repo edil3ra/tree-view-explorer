@@ -3,7 +3,7 @@ export default class Config {
         root: 'http://localhost:8000/api',
         endpoint: {
             nodesTypes: 'nodeTypes',
-            nodes: 'nodeTypes',
+            nodes: 'nodes',
             tables: 'tables',
             columns: 'columns'
         }

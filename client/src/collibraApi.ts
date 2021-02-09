@@ -54,8 +54,8 @@ function createCollibraApi(): CollibraApiModel {
             get: (id: number) => get(Config.api.endpoint.nodesTypes, id),
         },
         nodes: {
-            all: () => all(Config.api.endpoint.nodesTypes),
-            get: (id: number) => get(Config.api.endpoint.nodesTypes, id),
+            all: () => all(Config.api.endpoint.nodes),
+            get: (id: number) => get(Config.api.endpoint.nodes, id),
         },
         tables: {
             all: () => all(Config.api.endpoint.tables),
@@ -76,7 +76,6 @@ export class CollibraApi {
         if(this.instance === undefined) {
             CollibraApi.instance = createCollibraApi()
         }
-        console.log(CollibraApi.instance)
         return CollibraApi.instance
     }
 }

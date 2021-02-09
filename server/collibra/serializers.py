@@ -11,7 +11,7 @@ class NodeTypesSerializer(serializers.ModelSerializer):
 class NodesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nodes
-        fields = ['id', 'node_type', 'parent', 'node_name']
+        fields = ['id', 'node_type', 'parent', 'node_name', 'children']
 
 
 class TablesSerializer(serializers.ModelSerializer):

@@ -1,0 +1,9 @@
+export const SET_NODES_TYPES = "SET_NODES_TYPES"
+export const SET_NODES = "SET_NODES"
+export const SET_COLUMNS = "SET_COLUNMS"
+export const SET_TABLES = "SET_TABLES"
+
+export const FETCH_NODES_TYPES = "FETCH_NODES_TYPES"
+export const FETCH_NODES = "FETCH_NODES"
+export const FETCH_COLUMNS = "FETCH_COLUNMS"
+export const FETCH_TABLES = "FETCH_TABLES"
