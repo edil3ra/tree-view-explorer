@@ -1,27 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div>
+        Semper viverra nam libero justo, laoreet sit amet cursus sit amet, dictum sit amet justo donec? Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque!
+    </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import { Options, Vue } from 'vue-class-component'
+import { CollibraApi } from './collibraApi'
 
+const collibirApi = CollibraApi.getInstance()
+console.log(collibirApi)
 @Options({
-  components: {
-    HelloWorld,
-  },
+    components: {
+        
+    },
+    
+    beforeMount() {
+        const result = this.getAllNodes()
+        console.log(result)
+    },
+
+    methods: {
+        getAllNodes() {
+            return collibirApi.nodes.all()            
+        }
+    }
 })
 export default class App extends Vue {}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
