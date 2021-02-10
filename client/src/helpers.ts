@@ -22,7 +22,8 @@ export const fromServerToClient = {
             idNodeType: fetchedNode.node_type,
             idParent: fetchedNode.parent,
             name: fetchedNode.node_name,
-            children: fetchedNode.children
+            children: fetchedNode.children,
+            tables: fetchedNode.tables,
         }
     },
     table(fetchedTable: FetchedTable): Table {
@@ -31,6 +32,7 @@ export const fromServerToClient = {
             idNode: fetchedTable.node,
             name: fetchedTable.table_name,
             description: fetchedTable.description,
+            columns: fetchedTable.columns
         }
     },
     column(fetchedColumn: FetchedColumn): Column {

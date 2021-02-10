@@ -3,10 +3,14 @@
         loading
     </div>
     <div v-else>
-        <tree-node
-            label="instances"
-            :nodes="nodesParent"
-            />
+        <p>instances</p>
+        <div>
+            <tree-node
+                v-for="node in nodesParent"
+                :key="node.id"
+                :node="node"
+                />
+        </div>
     </div>
 </template>
 

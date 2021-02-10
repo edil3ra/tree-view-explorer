@@ -12,7 +12,8 @@ import {
     FETCH_TABLES,
     GET_MAP_NODES,
     GET_MAP_NODES_TYPES,
-    GET_NODES_PARENT
+    GET_NODES_PARENT,
+    GET_MAP_TABLES
 } from './constants'
 
 import {
@@ -22,6 +23,7 @@ import {
     FetchedTable,
     NodeType,
     Node,
+    Table,
 } from './models'
 import { fromServerToClient } from "./helpers"
 
@@ -90,6 +92,11 @@ export const store = createStore<State>({
         [GET_MAP_NODES](state: State) {
             return new Map(state.nodes.map((node: Node) => {
                 return [node.id, node]
+            }))
+        },
+        [GET_MAP_TABLES](state: State) {
+            return new Map(state.tables.map((table: Table) => {
+                return [table.id, table]
             }))
         },
         [GET_MAP_NODES_TYPES](state: State) {

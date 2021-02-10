@@ -9,6 +9,7 @@ export type FetchedNode = {
     parent: number | null,
     node_name: string,
     children: Array<number>,
+    tables: Array<number>,
 }
 
 export type FetchedTable = {
@@ -16,6 +17,7 @@ export type FetchedTable = {
     node: number,
     table_name: string,
     description: string,
+    columns: Array<number>
 }
 
 export type FetchedColumn = {
@@ -37,6 +39,7 @@ export type Node = {
     idParent: number | null,
     name: string,
     children: Array<number>,
+    tables: Array<number>,
 }
 
 export type Table = {
@@ -44,6 +47,7 @@ export type Table = {
     idNode: number,
     name: string,
     description: string,
+    columns: Array<number>
 }
 
 export type Column = {
