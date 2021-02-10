@@ -1,11 +1,12 @@
 <template>
     <li class="tree-menu">
-        <a>
+        <a @click.prevent="() => hidden = !hidden">
             <i class="fas fa-folder-open"></i>
             {{ node.name }}
         </a>
         <template v-if="node.children.length > 0">
-            <ul class="menu-list">
+            <ul class="menu-list"
+                :class="{'is-hidden': hidden}">
                 <tree-node
                     v-for="child in getNodeFromIds"
                     :key="child.id"
@@ -14,7 +15,8 @@
             </ul>
         </template>
         <template v-if="node.tables.length > 0">
-            <ul class="menu-list">
+            <ul class="menu-list"
+                :class="{'is-hidden': hidden}">
                 <tree-table
                     v-for="table in getTableFromIds"
                     :key="table.id"
@@ -40,6 +42,11 @@ import TreeTable from './TreeTable.vue'
     props: {
         node: Node,
         level: Number
+    },
+    data() {
+        return {
+            hidden: true
+        }
     },
     computed: {
         ...mapGetters({

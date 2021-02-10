@@ -5,17 +5,18 @@
             <i class="fas fa-table"></i>
             {{ table.name }}
         </a>
+        
+        <ul :class="{'is-hidden': hidden}">
+            <li v-for="column in getColumnFromIds"
+                :key="column.id">
+                <a @click.prevent="() => handleColumnClicked(column)"
+                   :class="{'is-active': isColumnSelected(column)}">
+                    <i class="fas fa-columns"></i>
+                    {{column.name}}
+                </a>
+            </li>
+        </ul>
     </li>
-    <ul>
-        <li v-for="column in getColumnFromIds"
-            :key="column.id">
-            <a @click.prevent="() => handleColumnClicked(column)"
-               :class="{'is-active': isColumnSelected(column)}">
-                <i class="fas fa-columns"></i>
-                {{column.name}}
-            </a>
-        </li>
-    </ul>
 </template>
 
 <script lang="ts">
@@ -38,8 +39,14 @@ import { Column, Item, Table } from '../models'
             })
         },
     },
+    data() {
+        return {
+            hidden: true
+        }
+    },
     methods: {
         handleTableClicked(table: Table) {
+            this.hidden = !this.hidden
             this.$store.dispatch(SELECT_ITEM, {
                 id: table.id,
                 category: 'table',
