@@ -10,6 +10,9 @@ import {
     FETCH_NODES,
     FETCH_NODES_TYPES,
     FETCH_TABLES,
+    GET_MAP_NODES,
+    GET_MAP_NODES_TYPES,
+    GET_NODES_PARENT
 } from './constants'
 
 import {
@@ -79,17 +82,17 @@ export const store = createStore<State>({
         }
     },
     getters: {
-        nodesParent(state: State) {
+        [GET_NODES_PARENT](state: State) {
             return state.nodes.filter((node: Node) => {
                 return node.idParent === null
             })
         },
-        mapNodes(state: State) {
+        [GET_MAP_NODES](state: State) {
             return new Map(state.nodes.map((node: Node) => {
                 return [node.id, node]
             }))
         },
-        mapNodesTypes(state: State) {
+        [GET_MAP_NODES_TYPES](state: State) {
             return new Map(state.nodesTypes.map((nodeType: NodeType) => {
                 return [nodeType.id, nodeType]
             }))

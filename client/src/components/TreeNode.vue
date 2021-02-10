@@ -16,18 +16,26 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
+import { mapGetters } from "vuex"
+import { GET_MAP_NODES_TYPES, GET_MAP_NODES } from "../constants"
 
 @Options({
-  props: {
-    label: String,
-    nodes: Array,
-  }
+    props: {
+        label: String,
+        nodes: Array,
+    },
+    computed: {
+        ...mapGetters({
+            mapNodes: GET_MAP_NODES,
+            mapNodesTypes: GET_MAP_NODES_TYPES,
+        })
+    },
 })
 export default class TreeNode extends Vue {
-  label!: string
-  nodes!: Array<any>
+    label!: string
+    nodes!: Array<any>    
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped></style>

@@ -11,13 +11,13 @@ class NodeTypesSerializer(serializers.ModelSerializer):
 class NodesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nodes
-        fields = ['id', 'node_type', 'parent', 'node_name', 'children']
+        fields = ['id', 'node_type', 'parent', 'node_name', 'children', 'tables']
 
 
 class TablesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tables
-        fields = ['id', 'node', 'table_name', 'description']
+        fields = ['id', 'node', 'table_name', 'description', 'columns']
 
 
 class ColumnsSerializer(serializers.ModelSerializer):

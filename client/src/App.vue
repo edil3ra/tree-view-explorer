@@ -1,14 +1,21 @@
 <template>
-<div></div>
+    <div v-if="!isLoaded">
+        loading
+    </div>
+    <div v-else>
+        <tree-node
+            label="instances"
+            :nodes="nodesParent"
+            />
+    </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { CollibraApi } from './collibraApi'
 import TreeNode from './components/TreeNode.vue'
-import { FETCH_NODES_TYPES, FETCH_NODES, FETCH_COLUMNS, FETCH_TABLES } from './constants'
+import { FETCH_NODES_TYPES, FETCH_NODES, FETCH_COLUMNS, FETCH_TABLES, GET_NODES_PARENT } from './constants'
+import { mapGetters } from 'vuex'
 
-const collibirApi = CollibraApi.getInstance()
 @Options({
     components: {
         'tree-node': TreeNode
@@ -16,16 +23,12 @@ const collibirApi = CollibraApi.getInstance()
     data() {
         return {
             isLoaded: false,
-            nodesTypes: [],
-            nodes: [],
-            tables: [],
-            columns: [],
         }
     },
     
     
     async beforeMount() {
-        await Promise.all([
+        this.isLoaded = await Promise.all([
             await this.$store.dispatch(FETCH_NODES_TYPES),
             await this.$store.dispatch(FETCH_NODES),
             await this.$store.dispatch(FETCH_TABLES),
@@ -33,41 +36,10 @@ const collibirApi = CollibraApi.getInstance()
         ])
     },
 
-    methods: {
-        getNodesTypes() {
-            return collibirApi.nodesTypes.all()
-
-        },
-        
-        getNodes() {
-            return collibirApi.nodes.all()            
-        },
-
-        getTables() {
-            return collibirApi.tables.all()            
-        },
-
-        getColumns() {
-            return collibirApi.columns.all()            
-        },
-    },
-    
     computed: {
-        nodesParent() {
-            return this.nodes.filter((node: any) => {
-                return node.parent === null
-            })
-        },
-        mapNodes() {
-            return new Map(this.nodes.map((node: any) => {
-                return [node.id, node]
-            }))
-        },
-        mapNodesTypes() {
-            return new Map(this.nodesTypes.map((nodeType: any) => {
-                return [nodeType.id, nodeType]
-            }))
-        }
+        ...mapGetters({
+            nodesParent: GET_NODES_PARENT
+        })
     },
 })
 export default class App extends Vue {}
