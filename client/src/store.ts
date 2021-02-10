@@ -14,7 +14,9 @@ import {
     GET_MAP_NODES_TYPES,
     GET_NODES_PARENT,
     GET_MAP_TABLES,
-    GET_MAP_COLUMNS
+    GET_MAP_COLUMNS,
+    SELECT_ITEM,
+    SET_SELECTED_ITEM
 } from './constants'
 
 import {
@@ -26,6 +28,7 @@ import {
     Node,
     Table,
     Column,
+    Item,
 } from './models'
 import { fromServerToClient } from "./helpers"
 
@@ -39,10 +42,11 @@ export type FetchedNodeTypes = {
 }
 
 export interface State {
-    nodesTypes: Array<any>;
-    nodes: Array<any>;
-    tables: Array<any>;
-    columns: Array<any>;
+    selectedItem: Item | null
+    nodesTypes: Array<NodeType>
+    nodes: Array<Node>
+    tables: Array<Table>
+    columns: Array<Column>
 }
 
 // define injection key
@@ -52,6 +56,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
     state: {
+        selectedItem: null,
         nodesTypes: [],
         nodes: [],
         tables: [],
@@ -69,7 +74,11 @@ export const store = createStore<State>({
         },
         async [FETCH_COLUMNS]({ commit }) {
             commit(SET_COLUMNS, await collibirApi.columns.all())
+        },
+        [SELECT_ITEM]({ commit}, payload: Item) {
+            commit(SET_SELECTED_ITEM, payload)
         }
+        
     },
     mutations: {
         [SET_NODES_TYPES](state: State, payload: Array<FetchedNodeType>) {
@@ -83,6 +92,9 @@ export const store = createStore<State>({
         },
         [SET_COLUMNS](state: State, payload: Array<FetchedColumn> ) {
             state.columns = payload.map((column) => fromServerToClient.column(column))
+        },
+        [SET_SELECTED_ITEM](state: State, payload: Item ) {
+            state.selectedItem = payload
         }
     },
     getters: {

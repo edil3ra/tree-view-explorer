@@ -1,6 +1,12 @@
 <template>
     <div >
-        <p>Tellus integer feugiat scelerisque varius morbi enim nunc, faucibus a pellentesque sit amet, porttitor eget dolor morbi non! Tincidunt augue interdum velit euismod in pellentesque massa placerat duis ultricies lacus.</p>
+        <div v-if="!this.$store.state.selectedItem">
+            <p>No Item selected</p>
+        </div>
+        <div v-else>
+            <h2 class="title">{{ this.$store.state.selectedItem.name }}</h2>
+            <p>{{ this.$store.state.selectedItem.description }}</p>
+        </div>
     </div>
 </template>
 

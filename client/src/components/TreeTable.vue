@@ -1,6 +1,6 @@
 <template>
     <li>
-        <a>
+        <a @click.prevent="() => handleItemClicked(table)">
             <i class="fas fa-table"></i>
             {{ table.name }}
         </a>
@@ -8,7 +8,7 @@
     <ul>
         <li v-for="column in getColumnFromIds"
             :key="column.id">
-            <a>
+            <a @click.prevent="() => handleItemClicked(column)">
                 <i class="fas fa-columns"></i>
                 {{column.name}}
             </a>
@@ -19,8 +19,8 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
 import { mapGetters } from "vuex"
-import { GET_MAP_NODES_TYPES, GET_MAP_NODES, GET_MAP_COLUMNS } from "../constants"
-import { Column, Table } from '../models'
+import { GET_MAP_NODES_TYPES, GET_MAP_NODES, GET_MAP_COLUMNS, SELECT_ITEM } from "../constants"
+import { Column, Item, Table } from '../models'
 
 @Options({
     props: {
@@ -37,9 +37,17 @@ import { Column, Table } from '../models'
         },
     },
     
-    async beforeMount() {
-        console.log(this.table)
+    methods: {
+        handleItemClicked(item: Item) {
+            this.$store.dispatch(SELECT_ITEM, item)
+        }
     },
+    
+    async beforeMount() {
+        // console.log(this.table)
+    },
+
+
 
 })
 export default class TreeTable extends Vue {
