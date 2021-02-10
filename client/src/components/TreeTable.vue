@@ -1,11 +1,17 @@
 <template>
     <li>
-        <a >{{ table.name }}</a>
+        <a>
+            <i class="fas fa-table"></i>
+            {{ table.name }}
+        </a>
     </li>
     <ul>
         <li v-for="column in getColumnFromIds"
             :key="column.id">
-            <a>{{column.name}}</a>
+            <a>
+                <i class="fas fa-columns"></i>
+                {{column.name}}
+            </a>
         </li>
         </ul>
 </template>

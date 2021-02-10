@@ -3,20 +3,19 @@
         loading
     </div>
     <div v-else>
-        
-        <nav class="navbar mb-5" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand has-text-white has-background-dark">
-                <a class="navbar-item has-text-white" href="https://bulma.io">
+        <nav class="navbar mb-5 has-background-dark" >
+            <div class="navbar-brand  ">
+                <a class="navbar-item has-text-white">
                     COLLIBRA
                 </a>
             </div>
         </nav>
         
         <div class="columns">
-            <div class="column p-4 has-background-light">
+            <div class="column p-5 has-background-light">
                 <tree-menu />
             </div>
-            <div class="column is-8 ml-4 has-background-light">
+            <div class="column is-7 ml-4 has-background-light">
                 <detail-node />
             </div>
         </div>

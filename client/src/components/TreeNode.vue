@@ -1,6 +1,9 @@
 <template>
     <li class="tree-menu">
-        <a>{{ node.name }}</a>
+        <a>
+            <i class="fas fa-folder-open"></i>
+            {{ node.name }}
+        </a>
         <template v-if="node.children.length > 0">
             <ul class="menu-list">
                 <tree-node
