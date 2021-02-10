@@ -1,35 +1,42 @@
 <template>
-    <div class="tree-menu">
-        <div :style="indent">
-            {{ node.name }}
-        </div>
+    <li class="tree-menu">
+        <a>{{ node.name }}</a>
         <template v-if="node.children.length > 0">
-            <tree-node
-                v-for="child in getNodeFromIds"
-                :key="child.id"
-                :node="child"
-                />
+            <ul class="menu-list">
+                <tree-node
+                    v-for="child in getNodeFromIds"
+                    :key="child.id"
+                    :node="child"
+                    />
+            </ul>
         </template>
-
         <template v-if="node.tables.length > 0">
-            <tree-table
-                v-for="table in getTableFromIds"
-                :key="table.id"
-                :table="table"
-                />
+            <ul class="menu-list">
+                <tree-table
+                    v-for="table in getTableFromIds"
+                    :key="table.id"
+                    :table="table"
+                    />
+            </ul>
         </template>
-    </div>
+    </li>
 </template>
 
 <script lang="ts">
-    import { Options, Vue } from "vue-class-component"
+import { Options, Vue } from "vue-class-component"
 import { mapGetters } from "vuex"
 import { GET_MAP_NODES_TYPES, GET_MAP_NODES, GET_MAP_TABLES } from "../constants"
 import { Node, Table } from '../models'
+import TreeTable from './TreeTable.vue'
+
 
 @Options({
+    components: {
+        'tree-table': TreeTable,
+    },
     props: {
         node: Node,
+        level: Number
     },
     computed: {
         ...mapGetters({
@@ -49,13 +56,14 @@ import { Node, Table } from '../models'
     },
     
     async beforeMount() {
-        console.log(this.getNodeFromIds)
-        console.log(this.getTableFromIds)
-        console.log(this.mapNodes)
+        // console.log(this.getNodeFromIds)
+        // console.log(this.getTableFromIds)
+        // console.log(this.mapNodes)
     },
 })
 export default class TreeNode extends Vue {
     node!: Node
+    level!: number
 }
 </script>
 

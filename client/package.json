@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
     "core-js": "^3.6.5",
@@ -46,7 +47,7 @@
       "parser": "@typescript-eslint/parser"
     },
     "rules": {
-        "no-unused-vars": "off"
+      "no-unused-vars": "off"
     }
   },
   "browserslist": [

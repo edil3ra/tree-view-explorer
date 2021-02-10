@@ -3,26 +3,20 @@
         loading
     </div>
     <div v-else>
-        <p>instances</p>
-        <div>
-            <tree-node
-                v-for="node in nodesParent"
-                :key="node.id"
-                :node="node"
-                />
-        </div>
+        <tree-menu />
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import TreeNode from './components/TreeNode.vue'
 import { FETCH_NODES_TYPES, FETCH_NODES, FETCH_COLUMNS, FETCH_TABLES, GET_NODES_PARENT } from './constants'
 import { mapGetters } from 'vuex'
+import TreeMenu from './components/TreeMenu.vue'
+
 
 @Options({
     components: {
-        'tree-node': TreeNode
+        'tree-menu': TreeMenu
     },
     data() {
         return {

@@ -1,16 +1,21 @@
 <template>
-    <div>
-        <div v-for="column in table">
-            
-        </div>
-    </div>
+    <li>
+        <a>{{ table.name }}</a>
+    </li>
+    <ul>
+        <li v-for="column in getColumnFromIds"
+            :key="column.id">
+            <a>{{column.name}}</a>
+            <a>aaaaa</a>
+        </li>
+        </ul>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
 import { mapGetters } from "vuex"
-import { GET_MAP_NODES_TYPES, GET_MAP_NODES } from "../constants"
-import { Table } from '../models'
+import { GET_MAP_NODES_TYPES, GET_MAP_NODES, GET_MAP_COLUMNS } from "../constants"
+import { Column, Table } from '../models'
 
 @Options({
     props: {
@@ -18,13 +23,22 @@ import { Table } from '../models'
     },
     computed: {
         ...mapGetters({
-            mapNodes: GET_MAP_NODES,
-            mapNodesTypes: GET_MAP_NODES_TYPES,
-        })
+            mapColumns: GET_MAP_COLUMNS,
+        }),
+        getColumnFromIds(): Array<Column> {
+            return this.table.columns.map((columnId: number) => {
+                return this.mapColumns.get(columnId)
+            })
+        },
     },
+    
+    async beforeMount() {
+        console.log(this.table)
+    },
+
 })
-export default class TreeNode extends Vue {
-    table: Table
+export default class TreeTable extends Vue {
+    table!: Table
 }
 </script>
 

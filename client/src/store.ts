@@ -13,7 +13,8 @@ import {
     GET_MAP_NODES,
     GET_MAP_NODES_TYPES,
     GET_NODES_PARENT,
-    GET_MAP_TABLES
+    GET_MAP_TABLES,
+    GET_MAP_COLUMNS
 } from './constants'
 
 import {
@@ -24,6 +25,7 @@ import {
     NodeType,
     Node,
     Table,
+    Column,
 } from './models'
 import { fromServerToClient } from "./helpers"
 
@@ -97,6 +99,11 @@ export const store = createStore<State>({
         [GET_MAP_TABLES](state: State) {
             return new Map(state.tables.map((table: Table) => {
                 return [table.id, table]
+            }))
+        },
+        [GET_MAP_COLUMNS](state: State) {
+            return new Map(state.columns.map((column: Column) => {
+                return [column.id, column]
             }))
         },
         [GET_MAP_NODES_TYPES](state: State) {
