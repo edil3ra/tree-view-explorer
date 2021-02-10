@@ -1,6 +1,7 @@
 <template>
     <li>
-        <a @click.prevent="() => handleItemClicked(table)">
+        <a @click.prevent="() => handleTableClicked(table)"
+           :class="{'is-active': isTableSelected(table)}">
             <i class="fas fa-table"></i>
             {{ table.name }}
         </a>
@@ -8,12 +9,13 @@
     <ul>
         <li v-for="column in getColumnFromIds"
             :key="column.id">
-            <a @click.prevent="() => handleItemClicked(column)">
+            <a @click.prevent="() => handleColumnClicked(column)"
+               :class="{'is-active': isColumnSelected(column)}">
                 <i class="fas fa-columns"></i>
                 {{column.name}}
             </a>
         </li>
-        </ul>
+    </ul>
 </template>
 
 <script lang="ts">
@@ -36,19 +38,40 @@ import { Column, Item, Table } from '../models'
             })
         },
     },
-    
     methods: {
-        handleItemClicked(item: Item) {
-            this.$store.dispatch(SELECT_ITEM, item)
-        }
+        handleTableClicked(table: Table) {
+            this.$store.dispatch(SELECT_ITEM, {
+                id: table.id,
+                category: 'table',
+                name: table.name,
+                description: table.description,
+            })
+        },
+        handleColumnClicked(column: Column) {
+            this.$store.dispatch(SELECT_ITEM, {
+                id: column.id,
+                category: 'column',
+                name: column.name,
+                description: column.description,
+            })
+        },
+
+        isTableSelected(table: Table): boolean {
+            return this.$store.state.selectedItem !== null &&
+                this.$store.state.selectedItem.id === table.id &&
+                this.$store.state.selectedItem.category === 'table' 
+        },
+        
+        isColumnSelected(column: Table): boolean {
+            return this.$store.state.selectedItem !== null &&
+                this.$store.state.selectedItem.id === column.id &&
+                this.$store.state.selectedItem.category === 'column' 
+        },
+
     },
-    
     async beforeMount() {
         // console.log(this.table)
     },
-
-
-
 })
 export default class TreeTable extends Vue {
     table!: Table

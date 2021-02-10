@@ -58,6 +58,8 @@ export type Column = {
 }
 
 export type Item = {
+    id: number
+    category: 'table' | 'column'
     name: string
     description: string 
 }
