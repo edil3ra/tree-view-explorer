@@ -1,12 +1,11 @@
 <template>
     <li>
-        <a>{{ table.name }}</a>
+        <a >{{ table.name }}</a>
     </li>
     <ul>
         <li v-for="column in getColumnFromIds"
             :key="column.id">
             <a>{{column.name}}</a>
-            <a>aaaaa</a>
         </li>
         </ul>
 </template>

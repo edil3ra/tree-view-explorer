@@ -3,7 +3,23 @@
         loading
     </div>
     <div v-else>
-        <tree-menu />
+        
+        <nav class="navbar mb-5" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand has-text-white has-background-dark">
+                <a class="navbar-item has-text-white" href="https://bulma.io">
+                    COLLIBRA
+                </a>
+            </div>
+        </nav>
+        
+        <div class="columns">
+            <div class="column p-4 has-background-light">
+                <tree-menu />
+            </div>
+            <div class="column is-8 ml-4 has-background-light">
+                <detail-node />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -12,11 +28,13 @@ import { Options, Vue } from 'vue-class-component'
 import { FETCH_NODES_TYPES, FETCH_NODES, FETCH_COLUMNS, FETCH_TABLES, GET_NODES_PARENT } from './constants'
 import { mapGetters } from 'vuex'
 import TreeMenu from './components/TreeMenu.vue'
+import DetailNode from './components/DetailNode.vue'
 
 
 @Options({
     components: {
-        'tree-menu': TreeMenu
+        'tree-menu': TreeMenu,
+        'detail-node': DetailNode,
     },
     data() {
         return {

@@ -1,16 +1,14 @@
 <template>
-    <div>
-        <aside class="menu">
-            <p class="menu-label">instances</p>
-            <ul class="menu-list">
-                <tree-node
-                    v-for="node in nodesParent"
-                    :key="node.id"
-                    :node="node"
-                    />
-            </ul>
-        </aside>
-    </div>
+    <aside class="menu">
+        <p class="menu-label">instances</p>
+        <ul class="menu-list">
+            <tree-node
+                v-for="node in nodesParent"
+                :key="node.id"
+                :node="node"
+                />
+        </ul>
+    </aside>
 </template>
 
 <script lang="ts">
