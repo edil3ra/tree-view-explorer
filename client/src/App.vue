@@ -6,7 +6,7 @@
         <nav class="navbar mb-5 has-background-dark" >
             <div class="navbar-brand  ">
                 <a class="navbar-item has-text-white">
-                    COLLIBRA
+                    TREE VIEWER
                 </a>
             </div>
         </nav>
